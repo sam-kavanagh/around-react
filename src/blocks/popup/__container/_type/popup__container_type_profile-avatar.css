@@ -1,0 +1,12 @@
+.popup__container_type_profile-avatar {
+    max-height: 272px;
+    max-width:  430px;
+    width: auto;
+    padding: 34px, 36px;
+}
+
+@media screen and (max-width: 600px) {
+    .popup__container_type_profile-avatar {
+        width: 100%;
+    }
+}

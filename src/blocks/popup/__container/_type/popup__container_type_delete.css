@@ -1,0 +1,14 @@
+.popup__container_type_delete {
+    display: initial;
+    max-width: 430px;
+    max-height: 181px;
+    left: 425px;
+    top: 270px;
+    position: absolute;
+}
+
+@media screen and (max-width: 600px) {
+    .popup__container_type_delete  {
+        width: 100%;
+    }
+}
