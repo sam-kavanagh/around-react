@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Card from "./Card";
 import { api } from "../utils/api";
 
@@ -8,18 +8,18 @@ function Main({
   onAddPlaceClick,
   onCardClick,
 }) {
-  const [userName, setuserName] = React.useState("");
-  const [userAvatar, setuserAvatar] = React.useState("");
-  const [userDescription, setuserDescription] = React.useState("");
-  const [cards, setCards] = React.useState([]);
+  const [user, setUser] = useState({});
+  const [cards, setCards] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     api
       .getAppInfo()
-      .then(([userData, card]) => {
-        setuserName(userData.name);
-        setuserAvatar(userData.avatar);
-        setuserDescription(userData.about);
+      .then(([userInfo, card]) => {
+        setUser({
+          name: userInfo.name,
+          avatar: userInfo.avatar,
+          about: userInfo.description,
+        })
         setCards(card);
       })
       .catch((error) => console.log(error));
@@ -28,33 +28,33 @@ function Main({
 
   return (
     <main className="main">
-      <section class="profile">
-        <div class="profile__container">
-          <div class="profile__avatar">
+      <section className="profile">
+        <div className="profile__container">
+          <div className="profile__avatar">
             <button
               type="button"
               className="profile__avatar-button"
               onClick={onEditAvatarClick}
-            ></button>
+            />
           </div>
-          <img src={userAvatar} alt={userAvatar ? userName : ''}   className="profile__image" />
+          <img src={user.avatar} alt={user.avatar ? user.name : ''}   className="profile__image" />
         </div>
         <div className="profile__info">
-          <h2 className="profile__name">{userName}</h2>
-          <p className="profile__description">{userDescription}</p>
+          <h2 className="profile__name">{user.name}</h2>
+          <p className="profile__description">{user.description}</p>
           <button
             onClick={onEditProfileClick}
             type="button"
             id="edit-profile-button"
             className="profile__edit-button"
-          ></button>
+          />
         </div>
         <button
           onClick={onAddPlaceClick}
           type="button"
           className="profile__add-button"
           id="add-card-button"
-        ></button>
+        />
       </section>
       <section className="card-template">
         <ul className="elements">

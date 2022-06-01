@@ -86,8 +86,8 @@ function App() {
             type="text"
             placeholder="Explorer"
             className="popup__input"
-            minlength="2"
-            maxlength="200"
+            minLength="2"
+            maxLength="200"
             required
           />
           <span id="description-input-error" className="popup__error-text">
@@ -107,8 +107,8 @@ function App() {
             type="text"
             placeholder="Title"
             className="popup__input"
-            minlength="1"
-            maxlength="30"
+            minLength="1"
+            maxLength="30"
             required
           />
           <span id="title-input-error" className="popup__error-text">
@@ -139,8 +139,8 @@ function App() {
             type="text"
             placeholder="https://somewebsite.com/someimage.jpg"
             className="popup__input"
-            minlength="1"
-            maxlength="200"
+            minLength="1"
+            maxLength="200"
             required
           />
           <span id="avatar-input-error" className="popup__error-text">

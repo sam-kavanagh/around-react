@@ -13,7 +13,7 @@ function Card({ card, onCardClick, onDeleteCard }) {
         type="button"
         className="element__trash-button"
         onClick={onDeleteCard}
-      ></button>
+      />
       <img
         src={card.link}
         alt={card.name}
@@ -21,15 +21,16 @@ function Card({ card, onCardClick, onDeleteCard }) {
         className="element__image"
         style={cardStyle}
       />
-      <div class="element__card">
-        <h2 class="element__title">{card.name}</h2>
-        <div class="element__like-container">
-          <button type="button" class="element__like-button"></button>
+      <div className="element__card">
+        <h2 className="element__title">{card.name}</h2>
+        <div className="element__like-container">
+          <button type="button" className="element__like-button"/>
           <p className="element__like-count">{card.likes.length}</p>
         </div>
       </div>
     </article>
   );
 }
+
 
 export default Card;
