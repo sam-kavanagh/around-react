@@ -26,6 +26,6 @@ Node.js is an open-source, cross-platform runtime environment that allows develo
 Node. js is primarily used for non-blocking, event-driven servers, due to its single-threaded nature.
 It's used for traditional web sites and back-end API services.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/sam-kavanagh/around-react).
 
 I hope you enjoy!
