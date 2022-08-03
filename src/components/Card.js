@@ -1,13 +1,21 @@
 import React from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-function Card({ card, onCardClick, onDeleteCard }) {
+function Card({ card, onCardClick, onCardDelete , onCardLike}) {
   const cardStyle = { backgroundImage: `url(${card.link})` };
 
   const currentUser = React.useContext(CurrentUserContext);
 
   function handleClick() {
     onCardClick(card);
+  }
+
+  function handleLikeClick() {
+    onCardLike(card);
+  }
+
+  function handleDeleteClick() {
+    onCardDelete(card);
   }
 
   // Checking if the current user is the owner of the current card
@@ -18,7 +26,7 @@ function Card({ card, onCardClick, onDeleteCard }) {
     isOwn ? "element__trash-button_visible" : "element__trash-button_hidden"
   }`;
 
-  // Check if the card was liked by the current user
+  // // Check if the card was liked by the current user
   const isLiked = card.likes.some((user) => user._id === currentUser._id);
 
   // Create a variable which you then set in `className` for the like button
@@ -29,7 +37,7 @@ function Card({ card, onCardClick, onDeleteCard }) {
       <button
         type="button"
         className={cardDeleteButtonClassName}
-        onClick={onDeleteCard}
+        onClick={handleDeleteClick}
       />
       <img
         src={card.link}
@@ -41,7 +49,7 @@ function Card({ card, onCardClick, onDeleteCard }) {
       <div className="element__card">
         <h2 className="element__title">{card.name}</h2>
         <div className="element__like-container">
-          <button type="button" className="element__like-button" />
+          <button type="button" className={cardLikeButtonClassName} onClick={handleLikeClick} />
           <p className="element__like-count">{card.likes.length}</p>
         </div>
       </div>

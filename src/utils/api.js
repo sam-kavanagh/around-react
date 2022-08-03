@@ -77,6 +77,14 @@ class Api {
        method: "DELETE"
      }).then(this._handleServerResponse);
     }
+    
+    changeLikeCardStatus(cardId, like) {
+      return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+        headers: this._headers,
+        method: like ? "PUT" : "DELETE",
+        body: JSON.stringify(),
+      }).then(this._handleServerResponse);
+    }
   }
   
   export const api = new Api({

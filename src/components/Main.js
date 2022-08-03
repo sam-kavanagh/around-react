@@ -7,6 +7,8 @@ function Main({
   onEditProfileClick,
   onAddPlaceClick,
   onCardClick,
+  onCardLike,
+  onCardDelete,
   cards,
 }) {
   const currentUser = React.useContext(CurrentUserContext);
@@ -48,7 +50,7 @@ function Main({
       <section className="card-template">
         <ul className="elements">
           {cards.map((card) => (
-            <Card card={card} onCardClick={onCardClick} key={card._id} />
+            <Card card={card} onCardClick={onCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete} key={card._id} />
           ))}
         </ul>
       </section>
