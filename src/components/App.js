@@ -8,6 +8,7 @@ import ImagePopup from "./ImagePopup";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { api } from "../utils/api";
 import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
@@ -103,6 +104,16 @@ function App() {
     .catch((error) => console.log(error));
 }
 
+function handleUpdateAvatar(avatarUpdate){
+  api
+  .setUserAvatar(avatarUpdate)
+  .then((newAvatar) => {
+    setCurrentUser(newAvatar);
+    closeAllPopups();
+  })
+  .catch((error) => console.log(error));
+}
+
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -125,6 +136,11 @@ function App() {
             onClose={closeAllPopups}
             onUpdateUser={handleUpdateUser}
           />
+          <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
+          /> 
           <PopupWithForm
             title="New Place"
             name="new-card"
@@ -156,28 +172,6 @@ function App() {
               Please enter a web address.
             </span>
           </PopupWithForm>
-
-          <PopupWithForm
-            title="Change profile picture"
-            name="edit-avatar"
-            isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
-          >
-            <input
-              id="avatar-input"
-              name="avatar"
-              type="text"
-              placeholder="https://somewebsite.com/someimage.jpg"
-              className="popup__input"
-              minLength="1"
-              maxLength="200"
-              required
-            />
-            <span id="avatar-input-error" className="popup__error-text">
-              Please fill out this field.
-            </span>
-          </PopupWithForm>
-
           <PopupWithForm
             title="Are you Sure?"
             name="delete-card"
