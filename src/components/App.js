@@ -7,6 +7,7 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { api } from "../utils/api";
+import EditProfilePopup from "./EditProfilePopup";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
@@ -92,6 +93,17 @@ function App() {
       .catch((error) => console.log(error));
   }
 
+  function handleUpdateUser(userUpdate){
+    api
+    .patchUserInfo(userUpdate)
+    .then((newUserUpdate) => {
+      setCurrentUser(newUserUpdate);
+      closeAllPopups();
+    })
+    .catch((error) => console.log(error));
+}
+
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
@@ -108,40 +120,11 @@ function App() {
           />
           <Footer />
 
-          <PopupWithForm
-            title="Edit Profile"
-            name="edit"
+          <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
-          >
-            <input
-              id="name-input"
-              name="name"
-              type="text"
-              placeholder="Sam"
-              className="popup__input"
-              minLength="2"
-              maxLength="40"
-              required
-            />
-            <span id="name-input-error" className="popup__error-text">
-              Please fill out this field.
-            </span>
-            <input
-              id="description-input"
-              name="description"
-              type="text"
-              placeholder="Explorer"
-              className="popup__input"
-              minLength="2"
-              maxLength="200"
-              required
-            />
-            <span id="description-input-error" className="popup__error-text">
-              Please fill out this field.
-            </span>
-          </PopupWithForm>
-
+            onUpdateUser={handleUpdateUser}
+          />
           <PopupWithForm
             title="New Place"
             name="new-card"
