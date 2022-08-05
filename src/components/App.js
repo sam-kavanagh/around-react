@@ -9,6 +9,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { api } from "../utils/api";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
@@ -114,6 +115,15 @@ function handleUpdateAvatar(avatarUpdate){
   .catch((error) => console.log(error));
 }
 
+function handleAddPlaceSubmit(cardUpdate){
+  api
+  .addCard(cardUpdate)
+  .then((newCard) => {
+    setCards([newCard, ...cards]);
+    closeAllPopups();
+  })
+  .catch((error) => console.log(error));
+}
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -141,37 +151,11 @@ function handleUpdateAvatar(avatarUpdate){
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
           /> 
-          <PopupWithForm
-            title="New Place"
-            name="new-card"
-            isOpen={isAddPlacePopupOpen}
-            onClose={closeAllPopups}
-          >
-            <input
-              id="title-input"
-              name="name"
-              type="text"
-              placeholder="Title"
-              className="popup__input"
-              minLength="1"
-              maxLength="30"
-              required
-            />
-            <span id="title-input-error" className="popup__error-text">
-              Please fill out this field.
-            </span>
-            <input
-              id="link-input"
-              name="link"
-              type="url"
-              placeholder="Image Link"
-              className="popup__input"
-              required
-            />
-            <span id="link-input-error" className="popup__error-text">
-              Please enter a web address.
-            </span>
-          </PopupWithForm>
+          <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onAddPlaceSubmit={handleAddPlaceSubmit}
+          />
           <PopupWithForm
             title="Are you Sure?"
             name="delete-card"
