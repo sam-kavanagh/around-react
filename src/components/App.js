@@ -95,35 +95,35 @@ function App() {
       .catch((error) => console.log(error));
   }
 
-  function handleUpdateUser(userUpdate){
+  function handleUpdateUser(userUpdate) {
     api
-    .patchUserInfo(userUpdate)
-    .then((newUserUpdate) => {
-      setCurrentUser(newUserUpdate);
-      closeAllPopups();
-    })
-    .catch((error) => console.log(error));
-}
+      .patchUserInfo(userUpdate)
+      .then((newUserUpdate) => {
+        setCurrentUser(newUserUpdate);
+        closeAllPopups();
+      })
+      .catch((error) => console.log(error));
+  }
 
-function handleUpdateAvatar(avatarUpdate){
-  api
-  .setUserAvatar(avatarUpdate)
-  .then((newAvatar) => {
-    setCurrentUser(newAvatar);
-    closeAllPopups();
-  })
-  .catch((error) => console.log(error));
-}
+  function handleUpdateAvatar(avatarUpdate) {
+    api
+      .setUserAvatar(avatarUpdate)
+      .then((newAvatar) => {
+        setCurrentUser(newAvatar);
+        closeAllPopups();
+      })
+      .catch((error) => console.log(error));
+  }
 
-function handleAddPlaceSubmit(cardUpdate){
-  api
-  .addCard(cardUpdate)
-  .then((newCard) => {
-    setCards([newCard, ...cards]);
-    closeAllPopups();
-  })
-  .catch((error) => console.log(error));
-}
+  function handleAddPlaceSubmit(cardUpdate) {
+    api
+      .addCard(cardUpdate)
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch((error) => console.log(error));
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -147,14 +147,14 @@ function handleAddPlaceSubmit(cardUpdate){
             onUpdateUser={handleUpdateUser}
           />
           <EditAvatarPopup
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-          onUpdateAvatar={handleUpdateAvatar}
-          /> 
+            isOpen={isEditAvatarPopupOpen}
+            onClose={closeAllPopups}
+            onUpdateAvatar={handleUpdateAvatar}
+          />
           <AddPlacePopup
-          isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-          onAddPlaceSubmit={handleAddPlaceSubmit}
+            isOpen={isAddPlacePopupOpen}
+            onClose={closeAllPopups}
+            onAddPlaceSubmit={handleAddPlaceSubmit}
           />
           <PopupWithForm
             title="Are you Sure?"
