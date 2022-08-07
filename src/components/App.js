@@ -126,9 +126,9 @@ function App() {
   }
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
-      <div className="App">
-        <div className="page">
+    <div className="App">
+      <div className="page">
+        <CurrentUserContext.Provider value={currentUser}>
           <Header />
           <Main
             onEditAvatarClick={handleEditAvatarClick}
@@ -163,9 +163,9 @@ function App() {
           />
 
           <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-        </div>
+        </CurrentUserContext.Provider>
       </div>
-    </CurrentUserContext.Provider>
+    </div>
   );
 }
 
