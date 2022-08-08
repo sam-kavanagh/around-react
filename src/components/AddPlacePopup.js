@@ -1,7 +1,7 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
-function AddPlacePopup({ isOpen, onClose, onAddPlaceSubmit }) {
+function AddPlacePopup({ isOpen, onClose, onAddPlaceSubmit, isLoading }) {
   const [name, setName] = React.useState("");
   const [link, setLink] = React.useState("");
 
@@ -35,6 +35,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlaceSubmit }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      buttonText={isLoading? 'Saving...' : 'Save'}
     >
       <input
         id="title-input"

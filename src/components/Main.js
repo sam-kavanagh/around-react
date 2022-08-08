@@ -32,7 +32,7 @@ function Main({
         </div>
         <div className="profile__info">
           <h2 className="profile__name">{currentUser.name}</h2>
-          <p className="profile__description">{currentUser.description}</p>
+          <p className="profile__description">{currentUser.about}</p>
           <button
             onClick={onEditProfileClick}
             type="button"

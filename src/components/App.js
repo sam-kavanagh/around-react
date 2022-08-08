@@ -22,6 +22,9 @@ function App() {
 
   const [cards, setCards] = React.useState([]);
 
+  const [isLoading, setIsLoading] = React.useState(false);
+
+
   React.useEffect(() => {
     api
       .getAppInfo()
@@ -70,7 +73,6 @@ function App() {
   function handleCardLike(card) {
     // Check one more time if this card was already liked
     const isLiked = card.likes.some((user) => user._id === currentUser._id);
-
     api
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
@@ -80,7 +82,6 @@ function App() {
           )
         );
       })
-      .catch((error) => console.log(error));
   }
 
   function handleCardDelete(card) {
@@ -95,33 +96,51 @@ function App() {
   }
 
   function handleUpdateUser(userUpdate) {
+    setIsLoading(true);
     api
       .patchUserInfo(userUpdate)
       .then((newUserUpdate) => {
         setCurrentUser(newUserUpdate);
         closeAllPopups();
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => { 
+        setIsLoading(false);      
+      });
   }
 
   function handleUpdateAvatar(avatarUpdate) {
+    setIsLoading(true);
     api
       .setUserAvatar(avatarUpdate)
       .then((newAvatar) => {
         setCurrentUser(newAvatar);
         closeAllPopups();
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => { 
+        setIsLoading(false);      
+      });
   }
 
   function handleAddPlaceSubmit(cardUpdate) {
+    setIsLoading(true);
     api
       .addCard(cardUpdate)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => { 
+        setIsLoading(false);      
+      });
   }
 
   return (
@@ -144,16 +163,20 @@ function App() {
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
             onUpdateUser={handleUpdateUser}
+            isLoading={isLoading}
           />
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
             onUpdateAvatar={handleUpdateAvatar}
+            isLoading={isLoading}
+
           />
           <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
             onAddPlaceSubmit={handleAddPlaceSubmit}
+            isLoading={isLoading}
           />
           <PopupWithForm
             // title="Are you Sure?"

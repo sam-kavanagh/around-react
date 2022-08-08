@@ -2,7 +2,7 @@ import React from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Card({ card, onCardClick, onCardDelete , onCardLike}) {
-  const cardStyle = { backgroundImage: `url(${card.link})` };
+  // const cardStyle = { backgroundImage: `url(${card.link})` };
 
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -30,7 +30,7 @@ function Card({ card, onCardClick, onCardDelete , onCardLike}) {
   const isLiked = card.likes.some((user) => user._id === currentUser._id);
 
   // Create a variable which you then set in `className` for the like button
-  const cardLikeButtonClassName = `element__like-button &{isLiked && 'element__like-button_full}`;
+  const cardLikeButtonClassName = `element__like-button & ${isLiked && 'element__like-button_full'}`;
 
   return (
     <article className="element">
@@ -44,7 +44,6 @@ function Card({ card, onCardClick, onCardDelete , onCardLike}) {
         alt={card.name}
         onClick={handleClick}
         className="element__image"
-        style={cardStyle}
       />
       <div className="element__card">
         <h2 className="element__title">{card.name}</h2>
