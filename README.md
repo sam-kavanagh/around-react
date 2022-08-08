@@ -1,7 +1,11 @@
-#Project 10 - Around React
-(Getting Started with Create React App)
+#Project 11 - Around React
+(Adding functionality to our project 10 - Create React App)
 
 Features of the Web App:
+
+-The web app allows user to add cards to the page, like and dislike cards and other user added cards.
+-Allows user to delete cards they have added, only those that they have uploaded.
+-Edit profile functionality, added their name and description.
 
 React Functional Components
 Make API calls to the server for pulling and pushing all data on the website
@@ -10,7 +14,7 @@ Technologies and Standards Used:
 JSX
 CSS
 JavaScript
-React
+React; context, refs, useState, useEffect
 Asynchronous Programming
 API
 Node
